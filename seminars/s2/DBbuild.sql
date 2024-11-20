@@ -71,7 +71,7 @@ CREATE TABLE applicant (
 -- STUDENT related entities
 CREATE TABLE contact_person (
     id SERIAL PRIMARY KEY,
-    person_id INT NOT NULL REFERENCES person(id) ON DELETE CASCADE
+    person_id INT NOT NULL
 );
 
 CREATE TABLE student (
@@ -139,7 +139,7 @@ CREATE TABLE lesson (
     price_id INT NOT NULL REFERENCES pricing_scheme(id) ON DELETE CASCADE
 );
 
-CREATE TABLE lesson_group (
+CREATE TABLE group (
     id SERIAL PRIMARY KEY,
     maximum_number_of_students INT NOT NULL,
     minimum_number_of_students INT NOT NULL,
@@ -149,7 +149,7 @@ CREATE TABLE lesson_group (
 CREATE TABLE ensemble (
     id SERIAL PRIMARY KEY,
     target_genre VARCHAR(100) NOT NULL,
-    group_id INT NOT NULL REFERENCES lesson_group(id) ON DELETE CASCADE
+    group_id INT NOT NULL REFERENCES group(id) ON DELETE CASCADE
 );
 ----------------------------------------------------------------------------------------
 
