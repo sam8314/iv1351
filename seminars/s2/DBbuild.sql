@@ -131,8 +131,6 @@ CREATE TABLE pricing_scheme (
 CREATE TABLE lesson (
     id SERIAL PRIMARY KEY,
     level LEVEL NOT NULL,
-    min_students INT,
-    max_students INT,
     scheduled_time TIMESTAMP NOT NULL,
     scheduled BOOLEAN NOT NULL DEFAULT FALSE,
     given BOOLEAN NOT NULL DEFAULT FALSE,
