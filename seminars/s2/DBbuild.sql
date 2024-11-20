@@ -92,7 +92,7 @@ CREATE TABLE rental (
     id SERIAL PRIMARY KEY,
     student_id INT NOT NULL REFERENCES student(id) ON DELETE CASCADE,
     rent_start_date TIMESTAMP NOT NULL,
-    rent_end_date TIMESTAMP,
+    rent_end_date TIMESTAMP NOT NULL,
     instrument_id INT NOT NULL
 );
 
