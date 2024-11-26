@@ -137,7 +137,7 @@ CREATE TABLE lesson (
     price_id INT NOT NULL REFERENCES pricing_scheme(id) ON DELETE CASCADE
 );
 
-CREATE TABLE group (
+CREATE TABLE group_lesson (
     id SERIAL PRIMARY KEY,
     maximum_number_of_students INT NOT NULL,
     minimum_number_of_students INT NOT NULL,
@@ -147,7 +147,7 @@ CREATE TABLE group (
 CREATE TABLE ensemble (
     id SERIAL PRIMARY KEY,
     target_genre VARCHAR(100) NOT NULL,
-    group_id INT NOT NULL REFERENCES group(id) ON DELETE CASCADE
+    group_id INT NOT NULL REFERENCES group_lesson(id) ON DELETE CASCADE
 );
 ----------------------------------------------------------------------------------------
 
@@ -185,4 +185,4 @@ CREATE TABLE instructor_ensemble (
 -- UNIQUENESS AND CONSTRAINTS
 ----------------------------------------------------------------------------------------
 ALTER TABLE instrument ADD CONSTRAINT CHK_quantity_in_stock CHECK (quantity_in_stock >= 0);
-ALTER TABLE lesson ADD CONSTRAINT CHK_min_max_students CHECK (min_students <= max_students);
+ALTER TABLE group_lesson ADD CONSTRAINT CHK_min_max_students CHECK (minimum_number_of_students <= maximum_number_of_students);
