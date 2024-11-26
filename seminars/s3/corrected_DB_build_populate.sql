@@ -428,7 +428,7 @@ VALUES
 (20, 1, 6, false);
 
 
-INSERT INTO student_sibling(student_id, sibling_id) //changed the data so that the sibling number of the students varries more
+INSERT INTO student_sibling(student_id, sibling_id) (-- data updated so the siblings number of the students varries more
 VALUES
 (1, 2), (2, 1),
 (1, 3), (3, 1),
