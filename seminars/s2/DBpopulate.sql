@@ -262,29 +262,29 @@ VALUES
 (18, 12),
 (1, 13);
 
+
 INSERT INTO rental(student_id, rent_start_date, rent_end_date, instrument_id)
 VALUES 
-(14, '2024-03-12', NULL, 11),
+(14, '2024-03-12', '2024-11-10', 11),
 (19, '2024-07-12', '2024-12-12', 1),
 (20, '2024-06-12', '2024-11-12', 16),
-(3, '2024-10-12', NULL, 15),
+(3, '2024-10-12', '2024-12-28', 15),
 (7, '2024-01-17', '2024-10-17', 12),
-(5, '2024-09-12', NULL, 9),
-(10, '2024-05-02', NULL, 7),
-(8, '2024-03-01', NULL, 6),
+(5, '2024-09-12', '2024-12-02', 9),
+(10, '2024-05-02', '2024-12-25', 7),
+(8, '2024-03-01', '2024-12-16', 6),
 (6, '2024-08-10', '2024-10-10', 5),
-(4, '2024-03-29', NULL, 10),
+(4, '2024-03-29', '2024-11-13', 10),
 (9, '2024-01-01', '2024-10-01', 19),
 (1, '2024-10-05', '2024-11-05', 13),
-(2, '2024-07-08', NULL, 4),
-(18, '2024-04-22', NULL, 3),
+(2, '2024-07-08', '2024-12-25', 4),
+(18, '2024-04-22', '2024-12-25', 3),
 (15, '2024-03-15', '2024-10-15', 17),
-(17, '2024-11-09', NULL, 2),
+(17, '2024-11-09', '2024-11-10', 2),
 (12, '2024-01-12', '2024-11-12', 20),
-(13, '2024-04-02', NULL, 18),
-(16, '2024-04-14', NULL, 8),
-(11, '2024-08-26', NULL, 14);
-
+(13, '2024-04-02', '2024-11-10', 18),
+(16, '2024-04-14', '2024-11-28', 8),
+(11, '2024-08-26', '2024-11-25', 14);
 
 INSERT INTO instrument(currently_rented, monthly_rent_fee, type, brand, quantity_in_stock)
 VALUES
@@ -309,8 +309,7 @@ VALUES
 (false, 345.56, 'string', 'Gibson', 1),
 (false, 220.15, 'string', 'Gibson', 10);
 
-INSERT INTO student_current_receipt(student_id, current_month_rental_fee, current_month_lesson_fee, discount, previous_month_lesson_fee)
-VALUES
+
 INSERT INTO student_current_receipt(student_id, current_month_rental_fee, current_month_lesson_fee, discount, previous_month_lesson_fee)
 VALUES
 (7, 0.00, 1172.44, NULL, 1706.76),
@@ -407,7 +406,7 @@ INSERT INTO lesson (level, scheduled_time, scheduled, given, price_id) VALUES
 ('advanced', '2024-10-17 10:00:00', true, false, 10);
 
 
-INSERT INTO group (maximum_number_of_students, minimum_number_of_students, lesson_id) 
+INSERT INTO group_lesson (maximum_number_of_students, minimum_number_of_students, lesson_id) 
 VALUES
 (20, 4, 16),
 (5, 4, 1),
