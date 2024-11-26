@@ -15,3 +15,21 @@ GROUP BY
     TO_CHAR(scheduled_time, 'Month'), EXTRACT(MONTH FROM scheduled_time)
 ORDER BY 
     EXTRACT(MONTH FROM scheduled_time);
+
+
+
+
+SELECT 
+    sibling_count AS "No of siblings",
+    COUNT(*) AS "No of students"
+FROM (
+    SELECT 
+        s.id AS student_id,
+        COUNT(ss.sibling_id) AS sibling_count
+    FROM student s
+    LEFT JOIN student_sibling ss ON s.id = ss.student_id
+    WHERE s.terminated = false
+    GROUP BY s.id
+) AS sibling_counts
+GROUP BY sibling_count
+ORDER BY sibling_count;
