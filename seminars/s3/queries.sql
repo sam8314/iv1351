@@ -1,7 +1,6 @@
 ----------------------------------------------------------------------------------------
 -- THE NUMBER OF LESSONS GIVEN PER MONTH DURING A SPECIFIED YEAR
 ----------------------------------------------------------------------------------------
-
 SELECT 
     TO_CHAR(scheduled_time, 'Month') AS month_name,
     COUNT(*) AS total_lessons,
@@ -23,7 +22,6 @@ ORDER BY
 ----------------------------------------------------------------------------------------
 -- NUMBER OF STUDENTS THERE ARE WITH NO SIBLING, WITH ONE SIBLING AND TWO SIBLINGS
 ----------------------------------------------------------------------------------------
-
 SELECT 
     sibling_count AS "No of siblings",
     COUNT(*) AS "No of students"
