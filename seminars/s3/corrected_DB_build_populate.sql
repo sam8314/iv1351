@@ -428,28 +428,17 @@ VALUES
 (20, 1, 6, false);
 
 
-INSERT INTO student_sibling(student_id, sibling_id)
+INSERT INTO student_sibling(student_id, sibling_id) //changed the data so that the sibling number of the students varries more
 VALUES
-(3, 6),
-(20, 17),
-(17, 11),
-(8, 2),
-(7, 16),
-(12, 3),
-(11, 20),
-(15, 10),
-(14, 4),
-(16, 7),
-(4, 8),
-(6, 5),
-(13, 9),
-(9, 14),
-(2, 18),
-(10, 19),
-(19, 1),
-(5, 15),
-(18, 12),
-(1, 13);
+(1, 2), (2, 1),
+(1, 3), (3, 1),
+(2, 3), (3, 2),
+(4, 5), (5, 4),
+(6, 7), (7, 6),
+(8, 9), (9, 8),
+(10, 11), (11, 10);
+
+
 
 INSERT INTO rental(student_id, rent_start_date, rent_end_date, instrument_id)
 VALUES
