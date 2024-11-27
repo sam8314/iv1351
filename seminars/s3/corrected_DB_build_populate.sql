@@ -128,13 +128,20 @@ CREATE TABLE pricing_scheme (
     skill_level_price LEVEL NOT NULL
 );
 
-CREATE TABLE lesson (
+CREATE TABLE instructor ( -- was moved because of the foreign key dependency
+    id SERIAL PRIMARY KEY,
+    person_id INT NOT NULL REFERENCES person(id) ON DELETE CASCADE
+);
+
+CREATE TABLE lesson ( -- added instructor_id as a foreign key
     id SERIAL PRIMARY KEY,
     level LEVEL NOT NULL,
     scheduled_time TIMESTAMP NOT NULL,
     scheduled BOOLEAN NOT NULL DEFAULT FALSE,
     given BOOLEAN NOT NULL DEFAULT FALSE,
-    price_id INT NOT NULL REFERENCES pricing_scheme(id) ON DELETE CASCADE
+    price_id INT NOT NULL REFERENCES pricing_scheme(id) ON DELETE CASCADE,
+    instructor_id INT NOT NULL REFERENCES instructor(id) ON DELETE CASCADE
+    
 );
 
 CREATE TABLE group_lesson ( -- changed it from group to group_lesson to make it compile for postgresql
@@ -152,10 +159,7 @@ CREATE TABLE ensemble (
 ----------------------------------------------------------------------------------------
 
 -- INSTRUCTOR related entities
-CREATE TABLE instructor (
-    id SERIAL PRIMARY KEY,
-    person_id INT NOT NULL REFERENCES person(id) ON DELETE CASCADE
-);
+
 
 CREATE TABLE instructor_instrument (
     instrument_id INT NOT NULL REFERENCES instrument(id) ON DELETE CASCADE,
@@ -560,27 +564,36 @@ VALUES
 ('group_lesson', 'advanced'),
 ('individual', 'advanced');
 
-INSERT INTO lesson (level, scheduled_time, scheduled, given, price_id) VALUES
-('advanced', '2024-10-22 14:00:00', true, false, 14),
-('advanced', '2024-10-22 13:00:00', true, true, 7),
-('beginner', '2024-10-23 16:00:00', true, false, 15),
-('beginner', '2024-10-22 11:00:00', true, true, 6),
-('advanced', '2024-10-21 13:00:00', true, true, 13),
-('beginner', '2024-10-16 14:00:00', true, true, 5),
-('intermediate', '2024-10-14 11:00:00', true, true, 12),
-('beginner', '2024-10-19 13:00:00', true, true, 17),
-('beginner', '2024-10-26 10:00:00', true, true, 1),
-('advanced', '2024-10-16 13:00:00', true, false, 19),
-('advanced', '2024-10-13 13:00:00', true, true, 16),
-('advanced', '2024-10-15 17:00:00', true, true, 18),
-('advanced', '2024-10-22 16:00:00', true, false, 9),
-('advanced', '2024-10-15 17:00:00', true, true, 3),
-('beginner', '2024-10-19 14:00:00', false, false, 4),
-('intermediate', '2024-10-20 10:00:00', false, false, 8),
-('beginner', '2024-10-24 12:00:00', false, true, 2),
-('intermediate', '2024-10-13 15:00:00', true, false, 11),
-('intermediate', '2024-10-13 12:00:00', false, false, 20),
-('advanced', '2024-10-17 10:00:00', true, false, 10);
+INSERT INTO instructor (person_id) -- instructors were reduced to 4 
+VALUES
+(8), 
+(6), 
+(9), 
+(16);
+
+INSERT INTO lesson (level, scheduled_time, scheduled, given, price_id, instructor_id) --data was updated, date to current date and all scheduled and given were set to true
+VALUES
+('advanced', '2024-11-22 14:00:00', true, true, 14, 1),
+('advanced', '2024-11-22 13:00:00', true, true, 7, 2),
+('beginner', '2024-11-23 16:00:00', true, true, 15, 3),
+('beginner', '2024-11-22 11:00:00', true, true, 6, 4),
+('advanced', '2024-11-21 13:00:00', true, true, 13, 1),
+('beginner', '2024-11-16 14:00:00', true, true, 5, 2),
+('intermediate', '2024-11-14 11:00:00', true, true, 12, 3),
+('beginner', '2024-11-19 13:00:00', true, true, 17, 4),
+('beginner', '2024-11-26 10:00:00', true, true, 1, 1),
+('advanced', '2024-11-16 13:00:00', true, true, 19, 2),
+('advanced', '2024-11-13 13:00:00', true, true, 16, 3),
+('advanced', '2024-11-15 17:00:00', true, true, 18, 4),
+('advanced', '2024-11-22 16:00:00', true, true, 9, 1),
+('advanced', '2024-11-15 17:00:00', true, true, 3, 2),
+('beginner', '2024-11-19 14:00:00', true, true, 4, 3),
+('intermediate', '2024-11-20 10:00:00', true, true, 8, 4),
+('beginner', '2024-11-24 12:00:00', true, true, 2, 1),
+('intermediate', '2024-11-13 15:00:00', true, true, 11, 2),
+('intermediate', '2024-11-13 12:00:00', true, true, 20, 3),
+('advanced', '2024-11-17 10:00:00', true, true, 10, 4);
+
 
 
 INSERT INTO group_lesson (maximum_number_of_students, minimum_number_of_students, lesson_id)
@@ -633,28 +646,6 @@ VALUES
 ----------------------------------------------------------------------------------------
 -- INSTRUCTOR
 ----------------------------------------------------------------------------------------
-INSERT INTO instructor (person_id)
-VALUES
-(8),
-(6),
-(9),
-(16),
-(13),
-(18),
-(14),
-(17),
-(19),
-(2),
-(10),
-(5),
-(11),
-(1),
-(20),
-(12),
-(3),
-(4),
-(7),
-(15);
 
 INSERT INTO instructor_instrument (instrument_id, instructor_id)
 VALUES
