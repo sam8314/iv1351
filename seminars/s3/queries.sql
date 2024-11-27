@@ -37,7 +37,7 @@ GROUP BY sibling_count
 ORDER BY sibling_count;
 
 ----------------------------------------------------------------------------------------
--- IDS AND NAMES OF ALL INSTRUCTORS WHO HAVE GIVEN MORE THAN A SPECIFIC NUMBER OF LESSONS DURING THE CURRENT MONTH
+-- IDS AND NAMES OF ALL INSTRUCTORS WHO HAVE GIVEN 5 OR MORE LESSONS DURING THE CURRENT MONTH
 ----------------------------------------------------------------------------------------
 
 SELECT i.id instructor_id, p.first_name, p.last_name, 
