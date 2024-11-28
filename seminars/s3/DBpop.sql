@@ -77,7 +77,6 @@ VALUES
     ('he'),
     ('they'),
     ('any/all');
-)
 
 INSERT INTO person_email(person_id, email_id)
 VALUES
