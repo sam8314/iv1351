@@ -8,7 +8,7 @@ CREATE DATABASE soundgoodSEM2;
 -- ENUM TYPES
 CREATE TYPE LEVEL AS ENUM ('beginner', 'intermediate', 'advanced');
 CREATE TYPE INSTRUTYPE AS ENUM ('string', 'woodwind', 'brass', 'percussion', 'electronic');
-CREATE TYPE LESSONTYPE AS ENUM ('individual', 'group_lesson', 'ensemble');
+CREATE TYPE LESSONTYPE AS ENUM ('individual', 'group', 'ensemble');
 
 
 ----------------------------------------------------------------------------------------
