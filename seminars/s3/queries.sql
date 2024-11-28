@@ -40,8 +40,8 @@ ORDER BY sibling_count;
 -- IDS AND NAMES OF ALL INSTRUCTORS WHO HAVE GIVEN 2 OR MORE LESSONS DURING THE CURRENT MONTH
 ----------------------------------------------------------------------------------------
 
-SELECT i.id AS instructor_id, p.first_name, p.last_name, 
-       COUNT(l.id) AS number_of_lessons
+SELECT i.id AS instructor_id, p.first_name AS "first name", p.last_name AS "last name", 
+       COUNT(l.id) AS "number of lessons"
 FROM lesson l
 JOIN instructor i ON l.instructor_id = i.id
 JOIN person p ON i.person_id = p.id
@@ -50,7 +50,7 @@ WHERE l.given = true
        AND EXTRACT(MONTH FROM l.scheduled_time) = EXTRACT(MONTH FROM CURRENT_DATE)
 GROUP BY i.id, p.first_name, p.last_name
 HAVING COUNT(l.id) >= 2
-ORDER BY number_of_lessons DESC;
+ORDER BY "number of lessons" DESC;
 
 ----------------------------------------------------------------------------------------
 -- LIST OF ALL ENSEMBLES HELD DURING THE NEXT WEEK
