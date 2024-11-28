@@ -65,11 +65,11 @@ SELECT
     END AS "No of free seats"
 FROM 
     lesson l
-JOIN 
+INNER JOIN 
     pricing_scheme ps ON l.price_id = ps.id
-JOIN 
+INNER JOIN 
     group_lesson gl ON gl.lesson_id = l.id
-JOIN 
+INNER JOIN 
     ensemble e ON e.group_lesson_id = gl.id 
 WHERE 
     ps.type_price = 'ensemble'
