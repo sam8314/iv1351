@@ -590,11 +590,11 @@ VALUES
 ('advanced', '2024-11-22 16:00:00', true, true, 9, 1),
 ('advanced', '2024-11-15 17:00:00', true, true, 3, 2),
 ('beginner', '2024-11-19 14:00:00', true, false, 4, 3),
-('intermediate', '2024-11-20 10:00:00', true, false, 8, 4),
-('beginner', '2024-11-24 12:00:00', true, false, 2, 1),
-('intermediate', '2024-11-13 15:00:00', false, true, 11, 2),
-('intermediate', '2024-11-13 12:00:00', false, true, 20, 3),
-('advanced', '2024-11-17 10:00:00', true, false, 10, 4);
+('intermediate', '2024-11-29 10:00:00', true, false, 8, 4),
+('beginner', '2024-11-30 12:00:00', true, false, 2, 1),
+('intermediate', '2024-12-01 15:00:00', true, false, 11, 2),
+('intermediate', '2024-12-02 12:00:00', true, false, 20, 3),
+('advanced', '2024-12-03 10:00:00', true, false, 10, 4);
 
 
 
