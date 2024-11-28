@@ -37,7 +37,7 @@ GROUP BY sibling_count
 ORDER BY sibling_count;
 
 ----------------------------------------------------------------------------------------
--- IDS AND NAMES OF ALL INSTRUCTORS WHO HAVE GIVEN 5 OR MORE LESSONS DURING THE CURRENT MONTH
+-- IDS AND NAMES OF ALL INSTRUCTORS WHO HAVE GIVEN 2 OR MORE LESSONS DURING THE CURRENT MONTH
 ----------------------------------------------------------------------------------------
 
 SELECT i.id instructor_id, p.first_name, p.last_name, 
@@ -49,7 +49,7 @@ WHERE l.given = true
        AND EXTRACT(YEAR FROM l.scheduled_time) = EXTRACT(YEAR FROM CURRENT_DATE)
        AND EXTRACT(MONTH FROM l.scheduled_time) = EXTRACT(MONTH FROM CURRENT_DATE)
 GROUP BY i.id, p.first_name, p.last_name
-HAVING COUNT(l.id) >= 5
+HAVING COUNT(l.id) >= 2
 ORDER BY number_of_lessons DESC;
 
 ----------------------------------------------------------------------------------------
