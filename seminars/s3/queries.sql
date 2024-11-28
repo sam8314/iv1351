@@ -40,7 +40,7 @@ ORDER BY sibling_count;
 -- IDS AND NAMES OF ALL INSTRUCTORS WHO HAVE GIVEN 2 OR MORE LESSONS DURING THE CURRENT MONTH
 ----------------------------------------------------------------------------------------
 
-SELECT i.id instructor_id, p.first_name, p.last_name, 
+SELECT i.id AS instructor_id, p.first_name, p.last_name, 
        COUNT(l.id) AS number_of_lessons
 FROM lesson l
 JOIN instructor i ON l.instructor_id = i.id
