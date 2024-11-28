@@ -7,7 +7,7 @@ SELECT
     COUNT(CASE WHEN price_id IN (
         SELECT id FROM pricing_scheme WHERE type_price = 'individual') THEN 1 END) AS individual_lessons,
     COUNT(CASE WHEN price_id IN (
-        SELECT id FROM pricing_scheme WHERE type_price = 'group') THEN 1 END) AS group_lessons,
+        SELECT id FROM pricing_scheme WHERE type_price = 'group_lesson') THEN 1 END) AS group_lessons,
     COUNT(CASE WHEN price_id IN (
         SELECT id FROM pricing_scheme WHERE type_price = 'ensemble') THEN 1 END) AS ensemble_lessons
 FROM 
