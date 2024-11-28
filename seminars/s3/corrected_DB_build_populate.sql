@@ -8,7 +8,7 @@ CREATE DATABASE soundgoodSEM2;
 -- ENUM TYPES
 CREATE TYPE LEVEL AS ENUM ('beginner', 'intermediate', 'advanced');
 CREATE TYPE INSTRUTYPE AS ENUM ('string', 'woodwind', 'brass', 'percussion', 'electronic');
-CREATE TYPE LESSONTYPE AS ENUM ('individual', 'group', 'ensemble');
+CREATE TYPE LESSONTYPE AS ENUM ('individual', 'group_lesson', 'ensemble');
 
 
 ----------------------------------------------------------------------------------------
@@ -548,21 +548,21 @@ VALUES
 ('individual', 'advanced', 300.00),
 ('individual', 'beginner', 100.00),
 ('individual', 'advanced', 310.00),
-('group', 'beginner', 80.00),
-('group', 'advanced', 120.00),
-('group', 'intermediate', 100.00),
+('group_lesson', 'beginner', 80.00),
+('group_lesson', 'advanced', 120.00),
+('group_lesson', 'intermediate', 100.00),
 ('individual', 'beginner', 90.00),
 ('individual', 'beginner', 95.00),
 ('ensemble', 'beginner', 140.00),
-('group', 'beginner', 85.00),
+('group_lesson', 'beginner', 85.00),
 ('individual', 'intermediate', 250.00),
 ('ensemble', 'intermediate', 200.00),
 ('individual', 'advanced', 320.00),
 ('ensemble', 'intermediate', 210.00),
-('group', 'advanced', 130.00),
+('group_lesson', 'advanced', 130.00),
 ('ensemble', 'beginner', 155.00),
 ('individual', 'beginner', 110.00),
-('group', 'advanced', 135.00),
+('group_lesson', 'advanced', 135.00),
 ('individual', 'advanced', 330.00);
 
 
