@@ -55,33 +55,6 @@ ORDER BY "number of lessons" DESC;
 -- LIST OF ALL ENSEMBLES HELD DURING THE NEXT WEEK
 ----------------------------------------------------------------------------------------
 SELECT 
-    TO_CHAR(l.scheduled_time, 'Dy') AS day,
-    e.target_genre AS genre, 
-    CASE
-        WHEN COUNT(l.id) >= gl.maximum_number_of_students THEN 'No Seats' 
-        WHEN gl.maximum_number_of_students - COUNT(l.id) <= 2 THEN '1 or 2 Seats' 
-        ELSE 'Many Seats' 
-    END AS "No of free seats"
-FROM 
-    lesson l
-INNER JOIN 
-    pricing_scheme ps ON l.price_id = ps.id
-INNER JOIN 
-    group_lesson gl ON gl.lesson_id = l.id
-INNER JOIN 
-    ensemble e ON e.group_lesson_id = gl.id 
-WHERE 
-    ps.type_price = 'ensemble'
-    AND l.scheduled_time >= CURRENT_DATE
-    AND l.scheduled_time < CURRENT_DATE + INTERVAL '7 days' 
-GROUP BY 
-    TO_CHAR(l.scheduled_time, 'Dy'), e.target_genre, gl.maximum_number_of_students
-ORDER BY 
-    genre, day;
-
---------------------------------------
--- without joining pricing_scheme:
-SELECT 
 	l.id AS lesson_id,
     TO_CHAR(l.scheduled_time, 'Dy') AS day,
     e.target_genre AS genre, 
@@ -104,3 +77,4 @@ GROUP BY
     TO_CHAR(l.scheduled_time, 'Dy'), e.target_genre, gl.maximum_number_of_students, l.id
 ORDER BY 
     genre, day;
+
