@@ -78,3 +78,29 @@ GROUP BY
     TO_CHAR(l.scheduled_time, 'Dy'), e.target_genre, gl.maximum_number_of_students
 ORDER BY 
     genre, day;
+
+--------------------------------------
+-- without joining pricing_scheme:
+SELECT 
+	l.id AS lesson_id,
+    TO_CHAR(l.scheduled_time, 'Dy') AS day,
+    e.target_genre AS genre, 
+    CASE
+        WHEN COUNT(l.id) >= gl.maximum_number_of_students THEN 'No Seats' 
+        WHEN gl.maximum_number_of_students - COUNT(l.id) <= 2 THEN '1 or 2 Seats' 
+        ELSE 'Many Seats' 
+    END AS "No of free seats"
+FROM 
+    lesson l
+INNER JOIN 
+    group_lesson gl ON gl.lesson_id = l.id
+INNER JOIN 
+    ensemble e ON e.group_lesson_id = gl.id 
+WHERE 
+    l.scheduled_time >= CURRENT_DATE
+    AND l.scheduled_time < CURRENT_DATE + INTERVAL '7 days'
+    -- AND e.target_genre IS NOT NULL  -- Verifying that a genre exists for the ensemble
+GROUP BY 
+    TO_CHAR(l.scheduled_time, 'Dy'), e.target_genre, gl.maximum_number_of_students, l.id
+ORDER BY 
+    genre, day;
