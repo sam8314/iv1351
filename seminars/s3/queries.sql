@@ -1,23 +1,22 @@
 ----------------------------------------------------------------------------------------
 -- THE NUMBER OF LESSONS GIVEN PER MONTH DURING A SPECIFIED YEAR
 ----------------------------------------------------------------------------------------
-SELECT 
+SELECT
     TO_CHAR(scheduled_time, 'Month') AS month_name,
     COUNT(*) AS total_lessons,
-    COUNT(CASE WHEN price_id IN (
-        SELECT id FROM pricing_scheme WHERE type_price = 'individual') THEN 1 END) AS individual_lessons,
-    COUNT(CASE WHEN price_id IN (
-        SELECT id FROM pricing_scheme WHERE type_price = 'group_lesson') THEN 1 END) AS group_lessons,
-    COUNT(CASE WHEN price_id IN (
-        SELECT id FROM pricing_scheme WHERE type_price = 'ensemble') THEN 1 END) AS ensemble_lessons
-FROM 
-    lesson
-WHERE 
-    given = TRUE AND EXTRACT(YEAR FROM scheduled_time) = 2024
-GROUP BY 
-    TO_CHAR(scheduled_time, 'Month'), EXTRACT(MONTH FROM scheduled_time)
-ORDER BY 
-    EXTRACT(MONTH FROM scheduled_time);
+    COUNT(CASE WHEN ps.type_price = 'individual' THEN 1 END) AS individual_lessons,
+    COUNT(CASE WHEN ps.type_price = 'group_lesson' THEN 1 END) AS group_lessons,
+    COUNT(CASE WHEN ps.type_price = 'ensemble' THEN 1 END) AS ensemble_lessons
+FROM
+    lesson l
+LEFT JOIN
+    pricing_scheme ps ON l.price_id = ps.id
+WHERE
+    l.given = TRUE AND TO_CHAR(l.scheduled_time, 'YYYY') = '2024'
+GROUP BY
+    TO_CHAR(l.scheduled_time, 'Month'), TO_CHAR(l.scheduled_time, 'MM')
+ORDER BY
+    TO_CHAR(l.scheduled_time, 'MM');
 
 ----------------------------------------------------------------------------------------
 -- NUMBER OF STUDENTS THERE ARE WITH NO SIBLING, WITH ONE SIBLING AND TWO SIBLINGS
