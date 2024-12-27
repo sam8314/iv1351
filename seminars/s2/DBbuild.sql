@@ -8,7 +8,7 @@ CREATE DATABASE soundgoodSEM2;
 -- ENUM TYPES
 CREATE TYPE LEVEL AS ENUM ('beginner', 'intermediate', 'advanced');
 CREATE TYPE INSTRUTYPE AS ENUM ('string', 'woodwind', 'brass', 'percussion', 'electronic');
-CREATE TYPE LESSONTYPE AS ENUM ('individual', 'group', 'ensemble');
+CREATE TYPE LESSONTYPE AS ENUM ('individual', 'group_lesson', 'ensemble');
 
 
 ----------------------------------------------------------------------------------------
@@ -16,6 +16,7 @@ CREATE TYPE LESSONTYPE AS ENUM ('individual', 'group', 'ensemble');
 ----------------------------------------------------------------------------------------
 
 -- PERSON related entities
+
 CREATE TABLE person (
     id SERIAL PRIMARY KEY,
     person_number VARCHAR(100) UNIQUE NOT NULL,
@@ -69,6 +70,8 @@ CREATE TABLE applicant (
 ----------------------------------------------------------------------------------------
 
 -- STUDENT related entities
+
+
 CREATE TABLE contact_person (
     id SERIAL PRIMARY KEY,
     person_id INT NOT NULL
@@ -92,7 +95,7 @@ CREATE TABLE rental (
     id SERIAL PRIMARY KEY,
     student_id INT NOT NULL REFERENCES student(id) ON DELETE CASCADE,
     rent_start_date TIMESTAMP NOT NULL,
-    rent_end_date TIMESTAMP NOT NULL,
+    rent_end_date TIMESTAMP, -- removed the NOT NULL to work with populate script
     instrument_id INT NOT NULL
 );
 
@@ -122,22 +125,31 @@ CREATE TABLE student_lesson (
 ----------------------------------------------------------------------------------------
 
 -- LESSON related entities
+
 CREATE TABLE pricing_scheme (
     id SERIAL PRIMARY KEY,
     type_price LESSONTYPE NOT NULL,
-    skill_level_price LEVEL NOT NULL
+    skill_level_price LEVEL NOT NULL,
+    price DECIMAL(10, 2) NOT NULL --stores the price of the lesson
 );
 
-CREATE TABLE lesson (
+CREATE TABLE instructor ( -- was moved because of the foreign key dependency
+    id SERIAL PRIMARY KEY,
+    person_id INT NOT NULL REFERENCES person(id) ON DELETE CASCADE
+);
+
+CREATE TABLE lesson ( -- added instructor_id as a foreign key
     id SERIAL PRIMARY KEY,
     level LEVEL NOT NULL,
     scheduled_time TIMESTAMP NOT NULL,
     scheduled BOOLEAN NOT NULL DEFAULT FALSE,
     given BOOLEAN NOT NULL DEFAULT FALSE,
-    price_id INT NOT NULL REFERENCES pricing_scheme(id) ON DELETE CASCADE
+    price_id INT NOT NULL REFERENCES pricing_scheme(id) ON DELETE CASCADE,
+    instructor_id INT NOT NULL REFERENCES instructor(id) ON DELETE CASCADE
+    
 );
 
-CREATE TABLE group (
+CREATE TABLE group_lesson ( -- changed it from group to group_lesson to make it compile for postgresql
     id SERIAL PRIMARY KEY,
     maximum_number_of_students INT NOT NULL,
     minimum_number_of_students INT NOT NULL,
@@ -147,15 +159,11 @@ CREATE TABLE group (
 CREATE TABLE ensemble (
     id SERIAL PRIMARY KEY,
     target_genre VARCHAR(100) NOT NULL,
-    group_id INT NOT NULL REFERENCES group(id) ON DELETE CASCADE
+    group_lesson_id INT NOT NULL REFERENCES group_lesson(id) ON DELETE CASCADE
 );
 ----------------------------------------------------------------------------------------
 
 -- INSTRUCTOR related entities
-CREATE TABLE instructor (
-    id SERIAL PRIMARY KEY,
-    person_id INT NOT NULL REFERENCES person(id) ON DELETE CASCADE
-);
 
 CREATE TABLE instructor_instrument (
     instrument_id INT NOT NULL REFERENCES instrument(id) ON DELETE CASCADE,
