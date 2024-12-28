@@ -126,9 +126,15 @@ CREATE TABLE pricing_scheme (
     id SERIAL PRIMARY KEY,
     type_price LESSONTYPE NOT NULL,
     skill_level_price LEVEL NOT NULL
+    price DECIMAL(10, 2) NOT NULL --stores the price of the lesson
 );
 
-CREATE TABLE lesson (
+CREATE TABLE instructor (
+    id SERIAL PRIMARY KEY,
+    person_id INT NOT NULL REFERENCES person(id) ON DELETE CASCADE
+);
+
+CREATE TABLE lesson (   -- was moved because of the foreign key dependency
     id SERIAL PRIMARY KEY,
     level LEVEL NOT NULL,
     scheduled_time TIMESTAMP NOT NULL,
@@ -152,10 +158,6 @@ CREATE TABLE ensemble (
 ----------------------------------------------------------------------------------------
 
 -- INSTRUCTOR related entities
-CREATE TABLE instructor (
-    id SERIAL PRIMARY KEY,
-    person_id INT NOT NULL REFERENCES person(id) ON DELETE CASCADE
-);
 
 CREATE TABLE instructor_instrument (
     instrument_id INT NOT NULL REFERENCES instrument(id) ON DELETE CASCADE,
