@@ -125,7 +125,7 @@ CREATE TABLE student_lesson (
 CREATE TABLE pricing_scheme (
     id SERIAL PRIMARY KEY,
     type_price LESSONTYPE NOT NULL,
-    skill_level_price LEVEL NOT NULL
+    skill_level_price LEVEL NOT NULL,
     price DECIMAL(10, 2) NOT NULL --stores the price of the lesson
 );
 
