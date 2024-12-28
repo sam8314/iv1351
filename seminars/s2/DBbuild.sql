@@ -153,7 +153,7 @@ CREATE TABLE group_lesson (
 CREATE TABLE ensemble (
     id SERIAL PRIMARY KEY,
     target_genre VARCHAR(100) NOT NULL,
-    group_id INT NOT NULL REFERENCES group_lesson(id) ON DELETE CASCADE
+    group_lesson_id INT NOT NULL REFERENCES group_lesson(id) ON DELETE CASCADE
 );
 ----------------------------------------------------------------------------------------
 
