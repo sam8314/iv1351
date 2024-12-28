@@ -437,7 +437,7 @@ VALUES
 (15, 3, 6),
 (20, 3, 15);
 
-INSERT INTO ensemble ( target_genre, group_id)
+INSERT INTO ensemble ( target_genre, group_lesson_id)
 VALUES 
 ('Pop', 6),
 ('Pop', 4),
