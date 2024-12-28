@@ -360,28 +360,35 @@ VALUES
 ----------------------------------------------------------------------------------------
 -- LESSON
 ----------------------------------------------------------------------------------------
-INSERT INTO pricing_scheme (type_price, skill_level_price) 
+INSERT INTO pricing_scheme (type_price, skill_level_price, price)
 VALUES
-('ensemble', 'beginner'),
-('individual', 'advanced'),
-('individual', 'beginner'),
-('individual', 'advanced'),
-('group', 'beginner'),
-('group', 'advanced'),
-('group', 'intermediate'),
-('individual', 'beginner'),
-('individual', 'beginner'),
-('ensemble', 'beginner'),
-('group', 'beginner'),
-('individual', 'intermediate'),
-('ensemble', 'intermediate'),
-('individual', 'advanced'),
-('ensemble', 'intermediate'),
-('group', 'advanced'),
-('ensemble', 'beginner'),
-('individual', 'beginner'),
-('group', 'advanced'),
-('individual', 'advanced');
+('ensemble', 'beginner', 150.00),
+('individual', 'advanced', 300.00),
+('individual', 'beginner', 100.00),
+('individual', 'advanced', 310.00),
+('group_lesson', 'beginner', 80.00),
+('group_lesson', 'advanced', 120.00),
+('group_lesson', 'intermediate', 100.00),
+('individual', 'beginner', 90.00),
+('individual', 'beginner', 95.00),
+('ensemble', 'beginner', 140.00),
+('group_lesson', 'beginner', 85.00),
+('individual', 'intermediate', 250.00),
+('ensemble', 'intermediate', 200.00),
+('individual', 'advanced', 320.00),
+('ensemble', 'intermediate', 210.00),
+('group_lesson', 'advanced', 130.00),
+('ensemble', 'beginner', 155.00),
+('individual', 'beginner', 110.00),
+('group_lesson', 'advanced', 135.00),
+('individual', 'advanced', 330.00);
+
+INSERT INTO instructor (person_id) -- instructors were reduced to 4 
+VALUES
+(8), 
+(6), 
+(9), 
+(16);
 
 INSERT INTO lesson (level, scheduled_time, scheduled, given, price_id) VALUES
 ('advanced', '2024-10-22 14:00:00', true, false, 14),
@@ -406,7 +413,7 @@ INSERT INTO lesson (level, scheduled_time, scheduled, given, price_id) VALUES
 ('advanced', '2024-10-17 10:00:00', true, false, 10);
 
 
-INSERT INTO group (maximum_number_of_students, minimum_number_of_students, lesson_id) 
+INSERT INTO group_lesson (maximum_number_of_students, minimum_number_of_students, lesson_id) 
 VALUES
 (20, 4, 16),
 (5, 4, 1),
@@ -456,28 +463,6 @@ VALUES
 ----------------------------------------------------------------------------------------
 -- INSTRUCTOR
 ----------------------------------------------------------------------------------------
-INSERT INTO instructor (person_id)
-VALUES
-(8),
-(6),
-(9),
-(16),
-(13),
-(18),
-(14),
-(17),
-(19),
-(2),
-(10),
-(5),
-(11),
-(1),
-(20),
-(12),
-(3),
-(4),
-(7),
-(15);
 
 INSERT INTO instructor_instrument (instrument_id, instructor_id) 
 VALUES
